@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser,Group, Permission
+from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
@@ -9,12 +9,9 @@ class User(AbstractUser):
 
     avatar = models.ImageField(null=True, default="avatar.svg")
 
-    groups = models.ManyToManyField(Group, related_name='custom_user_groups', blank=True)
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions', blank=True)
-
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
+    
+    REQUIRED_FIELDS = ['username', 'name']
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
